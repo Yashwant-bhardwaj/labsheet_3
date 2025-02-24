@@ -1,0 +1,50 @@
+// Recursive binary search
+#include <iostream> 
+#include <vector> 
+using namespace std;
+
+int binarySearch(vector<int>& arr, int target, int start, int
+end, int count){
+	if (start > end){
+	return -1; // Target not found
+	}
+	int mid = (start + end) / 2;
+	count++; // Increment the step counter
+	if (arr[mid] == target){
+	cout << "Number of steps: " << count << endl;
+	return mid; // Target found
+	}
+	else if (arr[mid] > target){
+	// Search the left half
+	return binarySearch(arr, target, start, mid - 1, count);
+	}
+	else{
+	// Search the right half
+	return binarySearch(arr, target, mid + 1, end, count);
+	}
+}
+
+int main() {
+	int n, target;
+	// Get the size of the array from the user
+	cout << "Enter the size of the array: ";
+	cin >> n;
+	vector<int> arr(n);
+	// Get the array elements from the user
+	cout << "Enter " << n << " elements (sorted): ";
+	for (int i = 0; i < n; i++) {
+	cin >> arr[i];
+	}
+	// Get the target element to search for
+	cout << "Enter the target value to search for: ";
+	cin >> target;
+	// Call binarySearch with initial start=0, end=n-1, and  count=0
+	int result = binarySearch(arr, target, 0, arr.size() - 1,  0);
+	// Output the result of the search
+	if (result != -1) {
+	cout << "Element found at index: " << result << endl;
+	} else {
+	cout << "Element not found" << endl;
+	}
+	return 0;
+}
